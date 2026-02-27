@@ -57,7 +57,7 @@ nav ul li:hover{
 
 .hero{
   height:300px;
-  background:url('photos/hero.jpg') center/cover no-repeat;
+  background:url('Photos/Hero.jpeg') center/cover no-repeat;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -141,13 +141,11 @@ nav ul li:hover{
   color:white;
 }
 
-/* ABOUT */
 .about{
   background:#fff;
   text-align:center;
 }
 
-/* CONTACT */
 .contact{
   background:#f9f9f9;
 }
@@ -177,7 +175,6 @@ nav ul li:hover{
   cursor:pointer;
 }
 
-/* FOOTER */
 footer{
   background:#111;
   color:#ccc;
@@ -189,7 +186,6 @@ footer span{
   color:#33b5a6;
 }
 
-/* ===== MODAL ===== */
 .modal{
   display:none;
   position:fixed;
@@ -239,7 +235,6 @@ footer span{
   </div>
 </section>
 
-<!-- PHOTOS -->
 <section class="section" id="photos">
   <div class="section-title">Latest Photos</div>
   <div class="gallery" id="photoGallery"></div>
@@ -251,78 +246,56 @@ footer span{
   </div>
 </section>
 
-<!-- VIDEOS (CORRECTED) -->
 <section class="section" id="videos" style="display:none;">
   <div class="section-title">Latest Videos</div>
-
   <div class="gallery">
 
-    <!-- VIDEO 1 -->
     <div class="card">
-      <video 
-        muted 
-        loop
+      <video muted loop
         onmouseover="this.play()" 
         onmouseout="this.pause(); this.currentTime=0;"
-        onclick="openVideo('./'videos/Mounitain view.mp4)">
-
+        onclick="openVideo('videos/Mounitain view.mp4')">
         <source src="videos/Mounitain view.mp4" type="video/mp4">
       </video>
-
       <div class="card-info">
         <span>Mountain View</span>
         <span>Free Stock</span>
       </div>
     </div>
 
-    <!-- VIDEO 2 -->
     <div class="card">
-      <video 
-        muted 
-        loop
+      <video muted loop
         onmouseover="this.play()" 
         onmouseout="this.pause(); this.currentTime=0;"
-        onclick="openVideo('./videos/waterfall.mp4')">
-
-        <source src="./videos/waterfall.mp4" type="video/mp4">
+        onclick="openVideo('videos/waterfall.mp4')">
+        <source src="videos/waterfall.mp4" type="video/mp4">
       </video>
-
       <div class="card-info">
         <span>Waterfall</span>
         <span>Free Stock</span>
       </div>
     </div>
 
-    <!-- VIDEO 3 -->
     <div class="card">
-      <video 
-        muted 
-        loop
+      <video muted loop
         onmouseover="this.play()" 
         onmouseout="this.pause(); this.currentTime=0;"
-        onclick="openVideo('./videos/city timelapse.mp4')">
-
+        onclick="openVideo('videos/city timelapse.mp4')">
         <source src="videos/city timelapse.mp4" type="video/mp4">
       </video>
-
       <div class="card-info">
         <span>City Timelapse</span>
         <span>Free Stock</span>
       </div>
     </div>
 
-    <!-- VIDEO 4 -->
     <div class="card">
-      <video 
-        muted 
-        loop
+      <video muted loop
         onmouseover="this.play()" 
         onmouseout="this.pause(); this.currentTime=0;"
-        onclick="openVideo('./videos/ocena waves.mp4')">
-
+        onclick="openVideo('videos/ocena waves.mp4')">
         <source src="videos/ocena waves.mp4" type="video/mp4">
       </video>
-
       <div class="card-info">
         <span>Ocean Waves</span>
         <span>Free Stock</span>
@@ -332,18 +305,13 @@ footer span{
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="section about" id="about">
   <h2>About Us</h2>
-  <p>
-    Catalog-Z is a modern creative platform where users can explore beautiful photos and engaging videos.
-  </p>
+  <p>Catalog-Z is a modern creative platform where users can explore beautiful photos and engaging videos.</p>
 </section>
 
-<!-- CONTACT -->
 <section class="section contact" id="contact">
   <h2 style="text-align:center;margin-bottom:30px;color:#33b5a6;">Contact Us</h2>
-
   <form>
     <input type="text" placeholder="Your Name" required>
     <input type="email" placeholder="Your Email" required>
@@ -353,18 +321,15 @@ footer span{
 </section>
 
 <footer>
-  © 2026 <span>Catalog-Z</span> | Designed by Renu 💚
+  © 2026 <span>Catalog-Z</span>
 </footer>
 
-<!-- MODAL -->
 <div id="mediaModal" class="modal">
   <span class="close" onclick="closeModal()">&times;</span>
   <div class="modal-content" id="modalContent"></div>
 </div>
 
 <script>
-
-// PHOTO DATA
 const photos = [
   "2.jpeg","3.jpeg","4.jpeg","5.jpeg",
   "6.jpeg","7.jpeg","8.jpeg","9.jpeg",
@@ -385,8 +350,8 @@ function displayPhotos(){
 
   pageItems.forEach(photo=>{
     gallery.innerHTML += `
-      <div class="card" onclick="openImage('photos/${photo}')">
-        <img src="photos/${photo}">
+      <div class="card" onclick="openImage('Photos/${photo}')">
+        <img src="Photos/${photo}">
         <div class="card-info">
           <span>12 Oct 2026</span>
           <span>10k views</span>
@@ -428,7 +393,6 @@ function prevPage(){
   }
 }
 
-// SECTION SWITCH
 function showSection(section){
   document.getElementById("photos").style.display = "none";
   document.getElementById("videos").style.display = "none";
@@ -439,7 +403,6 @@ function scrollToSection(id){
   document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-// POPUP FUNCTIONS
 function openImage(src){
   document.getElementById("mediaModal").style.display="flex";
   document.getElementById("modalContent").innerHTML = `<img src="${src}">`;
@@ -466,7 +429,6 @@ window.onclick = function(event){
 }
 
 displayPhotos();
-
 </script>
 
 </body>
