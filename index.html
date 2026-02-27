@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catalog-Z</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Open Sans',sans-serif;
+}
+
+body{
+  background:#f2f2f2;
+  color:#555;
+}
+
+nav{
+  background:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:15px 60px;
+  box-shadow:0 2px 5px rgba(0,0,0,0.05);
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo{
+  font-size:20px;
+  font-weight:600;
+  color:#33b5a6;
+  cursor:pointer;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:25px;
+}
+
+nav ul li{
+  cursor:pointer;
+  font-weight:500;
+  color:#666;
+}
+
+nav ul li:hover{
+  color:#33b5a6;
+}
+
+.hero{
+  height:300px;
+  background:url('photos/hero.jpg') center/cover no-repeat;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.search-box{
+  display:flex;
+}
+
+.search-box input{
+  padding:12px 20px;
+  width:350px;
+  border:none;
+  outline:none;
+}
+
+.search-box button{
+  padding:12px 25px;
+  background:#33b5a6;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+.section{
+  padding:50px 80px;
+}
+
+.section-title{
+  margin-bottom:30px;
+  font-size:20px;
+  color:#33b5a6;
+}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:25px;
+}
+
+.card{
+  background:#fff;
+  padding:10px;
+  cursor:pointer;
+}
+
+.card img, .card video{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+}
+
+.card-info{
+  margin-top:10px;
+  font-size:13px;
+  display:flex;
+  justify-content:space-between;
+  color:#999;
+}
+
+.pagination{
+  margin-top:40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.page-numbers{
+  display:flex;
+  gap:10px;
+}
+
+.page-numbers span{
+  padding:6px 10px;
+  background:#ddd;
+  cursor:pointer;
+}
+
+.page-numbers span.active{
+  background:#33b5a6;
+  color:white;
+}
+
+/* ABOUT */
+.about{
+  background:#fff;
+  text-align:center;
+}
+
+/* CONTACT */
+.contact{
+  background:#f9f9f9;
+}
+
+.contact form{
+  max-width:500px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.contact input,
+.contact textarea{
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+  outline:none;
+}
+
+.contact button{
+  padding:12px;
+  border:none;
+  background:#33b5a6;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* FOOTER */
+footer{
+  background:#111;
+  color:#ccc;
+  text-align:center;
+  padding:20px;
+}
+
+footer span{
+  color:#33b5a6;
+}
+
+/* ===== MODAL ===== */
+.modal{
+  display:none;
+  position:fixed;
+  z-index:2000;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+}
+
+.modal-content img,
+.modal-content video{
+  max-width:90%;
+  max-height:80vh;
+  border-radius:10px;
+}
+
+.close{
+  position:absolute;
+  top:20px;
+  right:40px;
+  font-size:40px;
+  color:white;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo" onclick="scrollToSection('photos')">Catalog-Z</div>
+  <ul>
+    <li onclick="showSection('photos')">Photos</li>
+    <li onclick="showSection('videos')">Videos</li>
+    <li onclick="scrollToSection('about')">About</li>
+    <li onclick="scrollToSection('contact')">Contact</li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="search-box">
+    <input type="text" placeholder="Search">
+    <button>Search</button>
+  </div>
+</section>
+
+<!-- PHOTOS -->
+<section class="section" id="photos">
+  <div class="section-title">Latest Photos</div>
+  <div class="gallery" id="photoGallery"></div>
+
+  <div class="pagination">
+    <button onclick="prevPage()">Previous</button>
+    <div class="page-numbers" id="pageNumbers"></div>
+    <button onclick="nextPage()">Next Page</button>
+  </div>
+</section>
+
+<!-- VIDEOS (CORRECTED) -->
+<section class="section" id="videos" style="display:none;">
+  <div class="section-title">Latest Videos</div>
+
+  <div class="gallery">
+
+    <!-- VIDEO 1 -->
+    <div class="card">
+      <video 
+        muted 
+        loop
+        onmouseover="this.play()" 
+        onmouseout="this.pause(); this.currentTime=0;"
+        onclick="openVideo('./'videos/Mounitain view.mp4)">
+
+        <source src="videos/Mounitain view.mp4" type="video/mp4">
+      </video>
+
+      <div class="card-info">
+        <span>Mountain View</span>
+        <span>Free Stock</span>
+      </div>
+    </div>
+
+    <!-- VIDEO 2 -->
+    <div class="card">
+      <video 
+        muted 
+        loop
+        onmouseover="this.play()" 
+        onmouseout="this.pause(); this.currentTime=0;"
+        onclick="openVideo('./videos/waterfall.mp4')">
+
+        <source src="./videos/waterfall.mp4" type="video/mp4">
+      </video>
+
+      <div class="card-info">
+        <span>Waterfall</span>
+        <span>Free Stock</span>
+      </div>
+    </div>
+
+    <!-- VIDEO 3 -->
+    <div class="card">
+      <video 
+        muted 
+        loop
+        onmouseover="this.play()" 
+        onmouseout="this.pause(); this.currentTime=0;"
+        onclick="openVideo('./videos/city timelapse.mp4')">
+
+        <source src="videos/city timelapse.mp4" type="video/mp4">
+      </video>
+
+      <div class="card-info">
+        <span>City Timelapse</span>
+        <span>Free Stock</span>
+      </div>
+    </div>
+
+    <!-- VIDEO 4 -->
+    <div class="card">
+      <video 
+        muted 
+        loop
+        onmouseover="this.play()" 
+        onmouseout="this.pause(); this.currentTime=0;"
+        onclick="openVideo('./videos/ocena waves.mp4')">
+
+        <source src="videos/ocena waves.mp4" type="video/mp4">
+      </video>
+
+      <div class="card-info">
+        <span>Ocean Waves</span>
+        <span>Free Stock</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about" id="about">
+  <h2>About Us</h2>
+  <p>
+    Catalog-Z is a modern creative platform where users can explore beautiful photos and engaging videos.
+  </p>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact" id="contact">
+  <h2 style="text-align:center;margin-bottom:30px;color:#33b5a6;">Contact Us</h2>
+
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="4" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  © 2026 <span>Catalog-Z</span> | Designed by Renu 💚
+</footer>
+
+<!-- MODAL -->
+<div id="mediaModal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <div class="modal-content" id="modalContent"></div>
+</div>
+
+<script>
+
+// PHOTO DATA
+const photos = [
+  "2.jpeg","3.jpeg","4.jpeg","5.jpeg",
+  "6.jpeg","7.jpeg","8.jpeg","9.jpeg",
+  "10.jpeg","11.jpeg","12.jpeg","13.jpeg"
+];
+
+let currentPage = 1;
+const itemsPerPage = 8;
+const totalPages = Math.ceil(photos.length / itemsPerPage);
+
+function displayPhotos(){
+  const gallery = document.getElementById("photoGallery");
+  gallery.innerHTML = "";
+
+  const start = (currentPage-1)*itemsPerPage;
+  const end = start + itemsPerPage;
+  const pageItems = photos.slice(start,end);
+
+  pageItems.forEach(photo=>{
+    gallery.innerHTML += `
+      <div class="card" onclick="openImage('photos/${photo}')">
+        <img src="photos/${photo}">
+        <div class="card-info">
+          <span>12 Oct 2026</span>
+          <span>10k views</span>
+        </div>
+      </div>
+    `;
+  });
+
+  updatePagination();
+}
+
+function updatePagination(){
+  const pageNumbers = document.getElementById("pageNumbers");
+  pageNumbers.innerHTML = "";
+
+  for(let i=1;i<=totalPages;i++){
+    pageNumbers.innerHTML += `
+      <span class="${i===currentPage?'active':''}" onclick="goToPage(${i})">${i}</span>
+    `;
+  }
+}
+
+function goToPage(page){
+  currentPage = page;
+  displayPhotos();
+}
+
+function nextPage(){
+  if(currentPage < totalPages){
+    currentPage++;
+    displayPhotos();
+  }
+}
+
+function prevPage(){
+  if(currentPage > 1){
+    currentPage--;
+    displayPhotos();
+  }
+}
+
+// SECTION SWITCH
+function showSection(section){
+  document.getElementById("photos").style.display = "none";
+  document.getElementById("videos").style.display = "none";
+  document.getElementById(section).style.display = "block";
+}
+
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+// POPUP FUNCTIONS
+function openImage(src){
+  document.getElementById("mediaModal").style.display="flex";
+  document.getElementById("modalContent").innerHTML = `<img src="${src}">`;
+}
+
+function openVideo(src){
+  document.getElementById("mediaModal").style.display="flex";
+  document.getElementById("modalContent").innerHTML = `
+    <video controls autoplay>
+      <source src="${src}" type="video/mp4">
+    </video>
+  `;
+}
+
+function closeModal(){
+  document.getElementById("mediaModal").style.display="none";
+  document.getElementById("modalContent").innerHTML = "";
+}
+
+window.onclick = function(event){
+  if(event.target == document.getElementById("mediaModal")){
+    closeModal();
+  }
+}
+
+displayPhotos();
+
+</script>
+
+</body>
+</html>
